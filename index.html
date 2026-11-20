@@ -163,7 +163,7 @@ summary::-webkit-details-marker{display:none}
 summary::before{content:"+ "} details[open] summary::before{content:"– "}
 
 .tag{display:inline-block; font:600 10.5px "Space Grotesk",sans-serif; letter-spacing:.14em; text-transform:uppercase; padding:2px 8px; border-radius:4px; background:linear-gradient(90deg,var(--cyan),var(--violet)); color:#fff; margin-left:8px; vertical-align:2px}
-/* cv */
+.methods{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.methods>div{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:26px}.methods h4{margin:0 0 14px;font:600 12px "Space Grotesk",sans-serif;letter-spacing:.28em;text-transform:uppercase;color:var(--accent)}.methods ul{list-style:none;margin:0;padding:0}.methods li{padding:12px 0;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}.methods li b{display:block;font:600 17px "Space Grotesk",sans-serif;color:var(--ink);margin-bottom:2px}@media (max-width:820px){.methods{grid-template-columns:1fr}}/* cv */
 .cv{display:grid; grid-template-columns:repeat(2,1fr); gap:28px}
 .card{background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:30px}
 .card h3{font:600 15px "Space Grotesk",sans-serif; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); margin:0 0 10px}
@@ -198,7 +198,7 @@ footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wr
     <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span></button>
     <nav id="menu"><ul>
       <li><a href="#about">About</a></li>
-      <li><a href="#research">Research</a></li>
+      <li><a href="#research">Research</a></li><li><a href="#methods">Methods</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#talks">Talks</a></li>
       <li><a href="#cv">CV</a></li>
@@ -303,7 +303,7 @@ footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wr
 </div>
 </section>
 
-<div class="stats">
+<section id="methods" style="padding-top:20px"><div class="wrap"><div class="head rv"><h2>Methods<small>&#30740;&#31350;&#25163;&#27861;</small></h2><span class="idx">03</span></div><p class="lead rv">I do both <strong>experiment and computation</strong>: a design idea is predicted by calculation, then synthesised and verified in the lab.</p><div class="methods rv"><div><h4>Computation</h4><ul><li><b>DFT</b>Electronic structure, band alignment and defect calculations</li><li><b>MLIP MD</b>Molecular dynamics with machine-learning interatomic potentials</li></ul></div><div><h4>Synthesis</h4><ul><li><b>High-temperature synthesis</b>Solid-state and flux reactions</li><li><b>High-pressure synthesis</b>Access to phases not stable at ambient pressure</li></ul></div><div><h4>Characterisation</h4><ul><li><b>Synchrotron XRD</b>Precise crystal-structure analysis</li><li><b>Neutron diffraction</b>Light elements and anion ordering</li></ul></div></div></div></section><div class="stats">
   <div class="wrap grid">
     
     <div class="stat rv"><div class="n" data-count="26">26</div><div class="l">Papers</div><div class="j">論文</div></div>
@@ -315,7 +315,7 @@ footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wr
 
 <section id="publications">
 <div class="wrap">
-  <div class="head rv"><h2>Publications<small>論文</small></h2><span class="idx">03</span></div>
+  <div class="head rv"><h2>Publications<small>論文</small></h2><span class="idx">04</span></div>
   <p class="rv" style="color:var(--muted);margin:-28px 0 28px">Selected papers — full list on <a href="https://scholar.google.com/citations?user=uZMY9bkAAAAJ">Google Scholar</a>.</p>
   <div class="rv"><ol class="items">
 <li><span class="d">2026</span><span><span class="t">Suppressing Second-Order Jahn&ndash;Teller Distortion of Bi<sup>3+</sup> by Smaller Y<sup>3+</sup>-Substitution in Bi<sub>3</sub>O<sub>4</sub>Cl</span><br><span class="v"><a href="https://pubs.acs.org/cmatex/article-abstract/38/19/10174/5434146/Suppressing-Second-Order-Jahn-Teller-Distortion-of">Chem. Mater. 2026, 38, 10174</a></span></span></li><li><span class="d">2026</span><span><span class="t">Cation Coordination Preferences toward Stacking Design in Layered Perovskites along the Perovskite [111] Direction</span><br><span class="v"><a href="https://doi.org/10.1021/jacs.6c06507">J. Am. Chem. Soc. 2026, 148, 36630</a></span></span></li>
@@ -334,7 +334,7 @@ footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wr
 
 <section id="talks" style="padding-top:20px">
 <div class="wrap">
-  <div class="head rv"><h2>Talks<small>学会発表</small></h2><span class="idx">04</span></div>
+  <div class="head rv"><h2>Talks<small>学会発表</small></h2><span class="idx">05</span></div>
   <div class="rv"><div class="year">2026</div>
   <ol class="items">
     <li><span class="d">2026</span><span><span class="t">Electrostatic Control of Electronic Structure in Modular Layered Crystals (poster)</span><br><span class="v">K. Ogawa, A. Walsh · 超セラミックス 国際シンポジウム</span></span></li>
@@ -395,7 +395,7 @@ footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wr
 
 <section id="cv" style="padding-top:20px">
 <div class="wrap">
-  <div class="head rv"><h2>CV<small>経歴・受賞</small></h2><span class="idx">05</span></div>
+  <div class="head rv"><h2>CV<small>経歴・受賞</small></h2><span class="idx">06</span></div>
   <div class="rv"><div class="cv">
     <div class="card">
       <h3>Career</h3>
@@ -436,7 +436,7 @@ footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wr
 
 <section id="contact" class="contact">
 <div class="wrap">
-  <div class="head rv"><h2>Contact<small>連絡先</small></h2><span class="idx">06</span></div>
+  <div class="head rv"><h2>Contact<small>連絡先</small></h2><span class="idx">07</span></div>
   <div class="rv">
     <div class="addr">Department of Chemistry, Graduate School of Science, Kyoto University<br>Kitashirakawa Oiwake-cho, Sakyo-ku, Kyoto 606-8502, Japan<br>〒606-8502 京都市左京区北白川追分町 京都大学大学院理学研究科 化学専攻</div>
     <a class="mail" href="mailto:ogawa.kanta.3y@kyoto-u.ac.jp">ogawa.kanta.3y@kyoto-u.ac.jp</a>
