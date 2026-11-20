@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kanta Ogawa</title>
+<meta name="description" content="Kanta Ogawa (小川 幹太), Assistant Professor, Kyoto University — understanding and designing the electronic structures of materials from a chemical perspective.">
+<meta property="og:title" content="Kanta Ogawa">
+<meta property="og:description" content="Chemistry-driven design of electronic structures in solids.">
+<meta property="og:image" content="assets/lonepair_JACS2024.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f6f8; --paper:#ffffff; --ink:#0e1220; --muted:#5d6475; --line:#e2e5eb;
+  --deep:#070b17; --deep2:#0e1530; --cyan:#3ad1e6; --violet:#7b6cff; --accent:#2457d6; --accent-soft:#e8eefc;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0b0f1c; --paper:#111729; --ink:#e8ebf3; --muted:#9aa3b8; --line:#1f2740; --accent:#7fa2ff; --accent-soft:#18213d; }
+}
+:root[data-theme="dark"]{ --bg:#0b0f1c; --paper:#111729; --ink:#e8ebf3; --muted:#9aa3b8; --line:#1f2740; --accent:#7fa2ff; --accent-soft:#18213d; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:70px}
+body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.75 "Inter","Noto Sans JP",system-ui,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline; text-underline-offset:3px}
+.wrap{max-width:1120px; margin:0 auto; padding:0 24px}
+.en{font-family:"Space Grotesk","Inter",sans-serif}
+
+/* loader */
+#loader{position:fixed; inset:0; z-index:100; background:var(--deep); color:#fff; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px; transition:opacity .6s ease, visibility .6s}
+#loader .pct{font-family:"Space Grotesk",sans-serif; font-size:56px; font-weight:600; letter-spacing:.02em}
+#loader .bar{width:180px; height:2px; background:rgba(255,255,255,.15); overflow:hidden}
+#loader .bar i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--cyan),var(--violet))}
+#loader .lbl{font-size:11px; letter-spacing:.35em; color:rgba(255,255,255,.55)}
+body.loaded #loader{opacity:0; visibility:hidden}
+
+/* header */
+header.nav{position:fixed; top:0; left:0; right:0; z-index:50; transition:background .3s, border-color .3s; border-bottom:1px solid transparent}
+header.nav .wrap{display:flex; align-items:center; justify-content:space-between; height:68px}
+.brand{font-family:"Space Grotesk",sans-serif; font-weight:600; font-size:18px; color:#fff; letter-spacing:.02em}
+.brand small{display:block; font:500 10px/1 "Inter",sans-serif; letter-spacing:.28em; color:rgba(255,255,255,.6); margin-top:4px}
+nav ul{display:flex; gap:28px; list-style:none; margin:0; padding:0}
+nav a{color:rgba(255,255,255,.85); font:500 13px "Space Grotesk",sans-serif; letter-spacing:.12em; text-transform:uppercase}
+nav a:hover{color:#fff; text-decoration:none}
+header.nav.solid{background:color-mix(in srgb,var(--bg) 90%,transparent); backdrop-filter:blur(12px); border-color:var(--line)}
+header.nav.solid .brand{color:var(--ink)} header.nav.solid .brand small{color:var(--muted)}
+header.nav.solid nav a{color:var(--muted)} header.nav.solid nav a:hover{color:var(--ink)}
+.menu-btn{display:none; background:none; border:0; color:inherit; padding:8px; cursor:pointer}
+.menu-btn span{display:block; width:22px; height:2px; background:#fff; margin:5px 0; transition:.3s}
+header.nav.solid .menu-btn span{background:var(--ink)}
+@media (max-width:820px){
+  .menu-btn{display:block}
+  nav{position:fixed; inset:68px 0 auto 0; background:var(--deep); max-height:0; overflow:hidden; transition:max-height .35s ease}
+  nav.open{max-height:420px}
+  nav ul{flex-direction:column; gap:0; padding:8px 24px 20px}
+  nav li a, header.nav.solid nav a{display:block; padding:12px 0; color:#fff; border-bottom:1px solid rgba(255,255,255,.08)}
+}
+
+/* hero */
+.hero{position:relative; min-height:100svh; background:radial-gradient(120% 80% at 80% 10%, #1b2a6b 0%, transparent 55%), radial-gradient(90% 70% at 10% 90%, #2a1458 0%, transparent 60%), var(--deep); color:#fff; display:flex; align-items:center; overflow:hidden}
+#lattice{position:absolute; inset:0; width:100%; height:100%; opacity:.9}
+.hero .wrap{position:relative; z-index:2; width:100%; padding-top:90px; padding-bottom:110px}
+.hero .kicker{font:500 12px "Space Grotesk",sans-serif; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase}
+.hero h1{font-family:"Space Grotesk",sans-serif; font-weight:600; font-size:clamp(40px,7.4vw,92px); line-height:1.02; letter-spacing:-.02em; margin:22px 0 22px; max-width:12ch}
+.hero h1 .grad{background:linear-gradient(90deg,var(--cyan),var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent}
+.hero .jp{font-size:clamp(15px,1.8vw,19px); color:rgba(255,255,255,.78); letter-spacing:.06em; margin:0 0 40px}
+.hero .who{display:flex; align-items:center; gap:16px; font-size:14px; color:rgba(255,255,255,.75)}
+.hero .who b{display:block; color:#fff; font:600 17px "Space Grotesk",sans-serif; letter-spacing:.02em}
+.hero .who img{width:52px; height:52px; border-radius:50%; object-fit:cover; object-position:50% 28%; border:2px solid rgba(255,255,255,.35)}
+.scroll{position:absolute; left:50%; bottom:28px; transform:translateX(-50%); z-index:2; color:rgba(255,255,255,.6); font:500 10px "Space Grotesk",sans-serif; letter-spacing:.35em; display:flex; flex-direction:column; align-items:center; gap:10px}
+.scroll:hover{text-decoration:none; color:#fff}
+.scroll i{width:1px; height:46px; background:linear-gradient(rgba(255,255,255,.7),transparent); animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0); transform-origin:top} 50%{transform:scaleY(1); transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0); transform-origin:bottom}}
+
+.crystal{position:absolute; right:-4%; top:50%; width:min(58vw,820px); transform:translateY(-50%); z-index:1; filter:drop-shadow(0 0 40px rgba(58,209,230,.25)); animation:float 9s ease-in-out infinite; pointer-events:none}
+@keyframes float{0%,100%{transform:translateY(-50%)} 50%{transform:translateY(-53%)}}
+@media (max-width:980px){ .crystal{right:-30%; width:120vw; opacity:.28} }
+@media (prefers-reduced-motion: reduce){ .crystal{animation:none} }
+/* section heads */
+section{padding:120px 0}
+.head{display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:56px; border-bottom:1px solid var(--line); padding-bottom:22px}
+.head h2{margin:0; font:600 clamp(40px,6vw,72px)/1 "Space Grotesk",sans-serif; letter-spacing:-.02em}
+.head h2 small{display:block; font:500 14px "Noto Sans JP",sans-serif; letter-spacing:.2em; color:var(--muted); margin-top:14px}
+.head .idx{font:500 13px "Space Grotesk",sans-serif; color:var(--muted); letter-spacing:.2em}
+.lead{font-size:clamp(18px,2vw,22px); line-height:1.7; max-width:820px; margin:0 0 64px}
+.lead strong{font-weight:600; background:linear-gradient(transparent 62%, color-mix(in srgb,var(--cyan) 35%,transparent) 62%)}
+
+/* about */
+.about{display:grid; grid-template-columns:300px 1fr; gap:64px; align-items:start}
+.about img{width:100%; aspect-ratio:1/1.12; object-fit:cover; object-position:50% 25%; border-radius:4px; filter:saturate(.9)}
+.about h3{font:600 26px "Space Grotesk",sans-serif; margin:0}
+.about .role{color:var(--muted); margin:6px 0 22px}
+.links{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+.links a{font:500 13px "Space Grotesk",sans-serif; letter-spacing:.06em; padding:8px 16px; border:1px solid var(--line); border-radius:999px; color:var(--ink)}
+.links a:hover{border-color:var(--accent); color:var(--accent); text-decoration:none}
+@media (max-width:820px){ .about{grid-template-columns:1fr; gap:28px} .about img{max-width:220px} }
+
+/* research pillars */
+.pillar{display:grid; grid-template-columns:1fr 1.1fr; gap:56px; align-items:center; padding:56px 0; border-bottom:1px solid var(--line)}
+.pillar:nth-of-type(even) .txt{order:2}
+.pillar .num{font:700 88px/1 "Space Grotesk",sans-serif; color:transparent; -webkit-text-stroke:1.2px color-mix(in srgb,var(--accent) 70%,transparent); letter-spacing:-.02em}
+.pillar h3{font:600 30px "Space Grotesk",sans-serif; margin:10px 0 16px; letter-spacing:-.01em}
+.pillar p{margin:0 0 18px; color:var(--ink)}
+.pillar figure{margin:0; background:#fff; border-radius:6px; overflow:hidden; box-shadow:0 30px 60px -30px rgba(14,18,32,.35); transition:transform .5s ease}
+.pillar figure:hover{transform:translateY(-4px)}
+.pillar img{display:block; width:100%; height:auto}
+.refs{display:flex; flex-wrap:wrap; gap:8px; padding:0; margin:0; list-style:none}
+.refs a{display:inline-block; font:500 12.5px "Space Grotesk",sans-serif; letter-spacing:.04em; padding:5px 12px; border-radius:999px; background:var(--accent-soft)}
+.refs a:hover{text-decoration:none; filter:brightness(.95)}
+.pillar.side{grid-template-columns:1fr; border-bottom:0}
+.pillar.side .num{font-size:14px; -webkit-text-stroke:0; color:var(--accent); letter-spacing:.3em; text-transform:uppercase}
+.apps{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:12px}
+.apps>div{background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:24px}
+.apps h4{margin:0 0 8px; font:600 17px "Space Grotesk",sans-serif}
+.apps p{font-size:14.5px; color:var(--muted); margin:0 0 14px}
+@media (max-width:860px){ .pillar{grid-template-columns:1fr; gap:28px; padding:40px 0} .pillar:nth-of-type(even) .txt{order:0} .apps{grid-template-columns:1fr} .pillar .num{font-size:64px} }
+
+/* tabs */
+.tabs{display:flex; gap:0; border-bottom:1px solid var(--line); margin-bottom:48px; overflow-x:auto}
+.tab{background:none; border:0; border-bottom:2px solid transparent; margin-bottom:-1px; padding:16px 26px 16px 0; margin-right:22px; cursor:pointer; color:var(--muted); font:600 17px "Space Grotesk",sans-serif; white-space:nowrap; transition:color .2s,border-color .2s}
+.tab span{display:block; font-size:11px; letter-spacing:.25em; margin-bottom:4px; color:var(--accent); opacity:.7}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink); border-bottom-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.panel{animation:fadein .5s ease}
+@keyframes fadein{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+.pgrid{display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:start}
+.panel h3{font:600 34px "Space Grotesk",sans-serif; letter-spacing:-.01em; margin:0}
+.jp2{color:var(--muted); font-size:14.5px; letter-spacing:.04em; margin:8px 0 28px}
+.qa{margin:0 0 24px}
+.qa dt{font:600 11.5px "Space Grotesk",sans-serif; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); margin-top:22px}
+.qa dd{margin:6px 0 0; padding-left:16px; border-left:2px solid var(--line)}
+.qa ul{margin:0; padding-left:18px} .qa li{margin-bottom:8px}
+.panel figure{margin:0; position:sticky; top:96px}
+.panel figure img{display:block; width:100%; height:auto; background:#fff; border-radius:6px; box-shadow:0 30px 60px -30px rgba(14,18,32,.35)}
+.panel figcaption{font-size:13px; color:var(--muted); margin-top:12px}
+@media (max-width:900px){ .pgrid{grid-template-columns:1fr; gap:28px} .panel figure{position:static; order:-1} .tab{font-size:15px; padding-right:0} }
+@media (prefers-reduced-motion: reduce){ .panel{animation:none} }
+/* stats band */
+.stats{background:var(--deep); color:#fff; padding:90px 0; position:relative; overflow:hidden}
+.stats::before{content:""; position:absolute; inset:0; background:radial-gradient(60% 120% at 100% 0%, rgba(123,108,255,.25), transparent 60%), radial-gradient(50% 100% at 0% 100%, rgba(58,209,230,.18), transparent 60%)}
+.stats .grid{position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:24px}
+.stat{border-left:1px solid rgba(255,255,255,.18); padding-left:22px}
+.stat .n{font:600 clamp(48px,6vw,76px)/1 "Space Grotesk",sans-serif; letter-spacing:-.02em; background:linear-gradient(90deg,#fff,#b9c7ff); -webkit-background-clip:text; background-clip:text; color:transparent}
+.stat .l{font:500 12px "Space Grotesk",sans-serif; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.65); margin-top:12px}
+.stat .j{font-size:12px; color:rgba(255,255,255,.45)}
+@media (max-width:760px){ .stats .grid{grid-template-columns:repeat(2,1fr); row-gap:44px} }
+
+/* lists */
+.year{font:600 15px "Space Grotesk",sans-serif; letter-spacing:.3em; margin:48px 0 6px; color:var(--accent)}
+ol.items{list-style:none; margin:0; padding:0}
+ol.items li{padding:18px 0; border-bottom:1px solid var(--line); display:grid; grid-template-columns:110px 1fr; gap:20px; transition:background .2s}
+ol.items li:hover{background:color-mix(in srgb,var(--accent-soft) 45%,transparent)}
+ol.items .d{color:var(--muted); font:500 13px "Space Grotesk",sans-serif; letter-spacing:.06em; padding-top:2px}
+ol.items .t{font-weight:500}
+ol.items .v{color:var(--muted); font-size:14px} ol.items .v b{color:var(--ink); font-weight:600}
+@media (max-width:560px){ ol.items li{grid-template-columns:1fr; gap:2px} }
+details{margin-top:36px; border-top:1px solid var(--line); padding-top:18px}
+summary{cursor:pointer; font:600 14px "Space Grotesk",sans-serif; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+ "} details[open] summary::before{content:"– "}
+
+.tag{display:inline-block; font:600 10.5px "Space Grotesk",sans-serif; letter-spacing:.14em; text-transform:uppercase; padding:2px 8px; border-radius:4px; background:linear-gradient(90deg,var(--cyan),var(--violet)); color:#fff; margin-left:8px; vertical-align:2px}
+/* cv */
+.cv{display:grid; grid-template-columns:repeat(2,1fr); gap:28px}
+.card{background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:30px}
+.card h3{font:600 15px "Space Grotesk",sans-serif; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); margin:0 0 10px}
+@media (max-width:820px){ .cv{grid-template-columns:1fr} }
+
+/* contact + footer */
+.contact{background:var(--deep); color:#fff}
+.contact .head{border-color:rgba(255,255,255,.12)} .contact .head small,.contact .head .idx{color:rgba(255,255,255,.55)}
+.contact .addr{font-size:17px; line-height:1.9; color:rgba(255,255,255,.85)}
+.contact .mail{display:inline-block; margin-top:26px; font:600 clamp(20px,3.4vw,36px) "Space Grotesk",sans-serif; color:#fff; background:linear-gradient(90deg,var(--cyan),var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent; word-break:break-all}
+footer{background:var(--deep); color:rgba(255,255,255,.5); font-size:12.5px; padding:28px 0 40px; border-top:1px solid rgba(255,255,255,.08)}
+footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:center}
+.theme{background:none; border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.7); border-radius:999px; padding:5px 12px; font:500 11px "Space Grotesk",sans-serif; letter-spacing:.15em; cursor:pointer}
+
+/* reveal */
+.rv{opacity:0; transform:translateY(28px); transition:opacity .9s ease, transform .9s ease}
+.rv.in{opacity:1; transform:none}
+@media (prefers-reduced-motion: reduce){ .rv{opacity:1; transform:none; transition:none} .scroll i{animation:none} html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<div id="loader" aria-hidden="true">
+  <div class="pct"><span id="pct">0</span>%</div>
+  <div class="bar"><i id="bar"></i></div>
+  <div class="lbl">LOADING</div>
+</div>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Kanta Ogawa<small>KYOTO UNIVERSITY</small></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span></button>
+    <nav id="menu"><ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#talks">Talks</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" style="padding:0">
+  <canvas id="lattice" aria-hidden="true"></canvas>
+  <img class="crystal" src="assets/hero.webp" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div class="kicker">Ogawa Kanta · Solid-State Chemistry</div>
+    <h1>Chemistry-driven design of <span class="grad">electronic structures</span></h1>
+    <p class="jp">物質の電子構造を、化学の言葉で理解し、設計する。</p>
+    <div class="who">
+      <img src="assets/photo.jpg" alt="">
+      <div><b>Kanta Ogawa / 小川 幹太</b>Assistant Professor, Graduate School of Science, Kyoto University</div>
+    </div>
+  </div>
+  <a class="scroll" href="#about">SCROLL<i></i></a>
+</section>
+
+<section id="about">
+<div class="wrap">
+  <div class="head rv"><h2>About<small>研究者紹介</small></h2><span class="idx">01</span></div>
+  <div class="about rv">
+    <img src="assets/photo.jpg" alt="Kanta Ogawa">
+    <div>
+      <h3>Kanta Ogawa <span style="font-weight:400;color:var(--muted);font-size:20px">小川 幹太</span></h3>
+      <p class="role">Assistant Professor · Department of Chemistry, Graduate School of Science, Kyoto University (Yamamoto Group)<br>京都大学大学院理学研究科 化学専攻 助教</p>
+      <p class="lead" style="margin:0">I aim to <strong>understand and design the electronic structures of solid-state materials from a chemical perspective</strong>. Rather than treating band structures merely as outputs of calculations, I interpret them in the language of chemistry — orbital interactions, lone pairs, coordination environments and electrostatic potentials — and turn these concepts into design principles for new materials.</p>
+      <div class="links">
+        <a href="https://scholar.google.com/citations?user=uZMY9bkAAAAJ">Google Scholar ↗</a>
+        <a href="https://orcid.org/0000-0002-6995-9848">ORCID ↗</a>
+        <a href="https://researchmap.jp/kanta_ogawa">researchmap ↗</a>
+        <a href="https://x.com/kanta_v">X ↗</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="research" style="padding-top:40px">
+<div class="wrap">
+  <div class="head rv"><h2>Research<small>研究テーマ</small></h2><span class="idx">02</span></div>
+  <article class="pillar rv">
+    <div class="txt">
+      <div class="num">01</div>
+      <h3>Lone Pair Chemistry</h3>
+      <p>Post-transition metal cations with an <i>ns</i><sup>2</sup><i>np</i><sup>0</sup> configuration, such as Bi<sup>3+</sup> and Pb<sup>2+</sup>, often carry a stereochemically active lone pair, much like NH<sub>3</sub>. By controlling the orbital interactions behind this activity — for example by confining Bi<sup>3+</sup> at a highly symmetric site — I tune band gaps and band-edge positions.</p>
+      <ul class="refs">
+        <li><a href="https://pubs.acs.org/doi/10.1021/jacs.4c00150">JACS 2024</a></li>
+        <li><a href="https://pubs.acs.org/doi/10.1021/acs.chemmater.3c00932">Chem. Mater. 2023</a></li>
+        <li><a href="https://pubs.acs.org/doi/10.1021/acsenergylett.3c01651">ACS Energy Lett. 2023</a></li>
+      </ul>
+    </div>
+    <figure><img src="assets/lonepair_JACS2024.jpg" alt="Suppressed lone-pair activity of Bi in Bi2YO4X narrows the band gap" loading="lazy"></figure>
+  </article>
+
+  <article class="pillar rv">
+    <div class="txt">
+      <div class="num">02</div>
+      <h3>Electrostatic Potential</h3>
+      <p>In crystals built from charged modular units, the electrostatic potential set by how those units are arranged shifts the band energies of each layer. This simple picture explains band-edge positions across Sillén–Aurivillius oxyhalides and can even separate the valence and conduction band edges in space — a handle for design beyond element substitution.</p>
+      <ul class="refs">
+        <li><a href="https://pubs.acs.org/doi/10.1021/jacs.4c13637">JACS 2025</a></li>
+        <li><a href="https://pubs.acs.org/doi/10.1021/jacs.1c02763">JACS 2021</a></li>
+      </ul>
+    </div>
+    <figure><img src="assets/electrostatic_JACS2025.jpg" alt="Neutral versus charged layered units and their band alignment" loading="lazy"></figure>
+  </article>
+
+  <article class="pillar rv">
+    <div class="txt">
+      <div class="num">03</div>
+      <h3>Defect Chemistry</h3>
+      <p>Defects usually limit solar-to-energy conversion by creating in-gap states that trap carriers. In the photocatalyst SrTiO<sub>3</sub>:Al, Al substitution next to an oxygen vacancy breaks the Ti 3d–Ti 3d interaction behind the vacancy's in-gap state, giving rise to extrinsic defect tolerance.</p>
+      <ul class="refs">
+        <li><a href="https://pubs.acs.org/doi/10.1021/jacs.5c07104">JACS 2025</a></li>
+      </ul>
+    </div>
+    <figure><img src="assets/defect_JACS2025.jpg" alt="Al substitution next to oxygen vacancy removes Ti 3d–3d in-gap state in SrTiO3" loading="lazy"></figure>
+  </article>
+
+  <article class="pillar side rv">
+    <div class="txt">
+      <div class="num">Application</div>
+      <h3>Photocatalysis</h3>
+      <p>I apply these principles to particulate photocatalysts for solar water splitting.</p>
+      <div class="apps">
+        <div><h4>Oxyiodide photocatalysts</h4><p>Introducing soft iodide into layered perovskite oxyhalides narrows the band gap while keeping long-lived carriers; interlayer orbital interactions and flux synthesis further tune their activity.</p>
+          <ul class="refs"><li><a href="https://doi.org/10.1021/jacs.1c02763">JACS 2021</a></li><li><a href="https://doi.org/10.1021/acs.chemmater.3c00932">Chem. Mater. 2023</a></li></ul></div>
+        <div><h4>Band and defect engineering</h4><p>Engineering the conduction band and defects to realise prominent visible-light-responsive photocatalysts.</p>
+          <ul class="refs"><li><a href="https://doi.org/10.1002/anie.202419624">Angew. Chem. 2025</a></li></ul></div>
+        <div><h4>Carrier flow and cocatalysts</h4><p>Controlling charge-carrier flow within a single photocatalyst particle, and clarifying the role of the CrO<sub>x</sub> shell in Rh/CrO<sub>x</sub> core–shell cocatalysts.</p>
+          <ul class="refs"><li><a href="https://pubs.rsc.org/en/content/articlelanding/2022/sc/d1sc06054f">Chem. Sci. 2022</a></li><li><a href="https://pubs.rsc.org/en/content/articlelanding/2023/ey/d2ey00109h">EES Catal. 2023</a></li></ul></div>
+      </div>
+    </div>
+  </article>
+</div>
+</section>
+
+<div class="stats">
+  <div class="wrap grid">
+    
+    <div class="stat rv"><div class="n" data-count="26">26</div><div class="l">Papers</div><div class="j">論文</div></div>
+    <div class="stat rv"><div class="n" data-count="37">37</div><div class="l">Presentations</div><div class="j">学会発表</div></div>
+    <div class="stat rv"><div class="n" data-count="9">09</div><div class="l">Awards</div><div class="j">受賞</div></div>
+    <div class="stat rv"><div class="n" data-count="4">04</div><div class="l">Research groups</div><div class="j">京大・ICL・東京科学大</div></div>
+  </div>
+</div>
+
+<section id="publications">
+<div class="wrap">
+  <div class="head rv"><h2>Publications<small>論文</small></h2><span class="idx">03</span></div>
+  <p class="rv" style="color:var(--muted);margin:-28px 0 28px">Selected papers — full list on <a href="https://scholar.google.com/citations?user=uZMY9bkAAAAJ">Google Scholar</a>.</p>
+  <div class="rv"><ol class="items">
+<li><span class="d">2026</span><span><span class="t">Cation Coordination Preferences toward Stacking Design in Layered Perovskites along the Perovskite [111] Direction</span><br><span class="v"><a href="https://doi.org/10.1021/jacs.6c06507">J. Am. Chem. Soc. 2026, 148, 36630</a></span></span></li>
+<li><span class="d">2025</span><span><span class="t">Defect Tolerance via External Passivation in the Photocatalyst SrTiO<sub>3</sub>:Al</span><br><span class="v"><b>K. Ogawa</b>, S. R. Kavanagh, F. Oba, A. Walsh · <a href="https://doi.org/10.1021/jacs.5c07104">J. Am. Chem. Soc. 2025, 147, 23180</a></span></span></li>
+<li><span class="d">2025</span><span><span class="t">Conduction Band and Defect Engineering for the Prominent Visible-Light Responsive Photocatalysts</span><br><span class="v"><a href="https://doi.org/10.1002/anie.202419624">Angew. Chem. Int. Ed. 2025</a></span></span></li>
+<li><span class="d">2025</span><span><span class="t">Electrostatic Control of Electronic Structure in Modular Inorganic Crystals</span><br><span class="v"><b>K. Ogawa</b>, A. Walsh · <a href="https://doi.org/10.1021/jacs.4c13637">J. Am. Chem. Soc. 2025, 147, 821</a></span></span></li>
+<li><span class="d">2024</span><span><span class="t">Band Gap Narrowing by Suppressed Lone-Pair Activity of Bi<sup>3+</sup></span><br><span class="v"><b>K. Ogawa</b>, R. Abe, A. Walsh · <a href="https://doi.org/10.1021/jacs.4c00150">J. Am. Chem. Soc. 2024, 146, 5806</a></span></span></li>
+<li><span class="d">2023</span><span><span class="t">Models of Oxygen Occupancy in Lead Phosphate Apatite Pb<sub>10</sub>(PO<sub>4</sub>)<sub>6</sub>O</span><br><span class="v"><b>K. Ogawa</b>, K. Tolborg, A. Walsh · <a href="https://doi.org/10.1021/acsenergylett.3c01651">ACS Energy Lett. 2023, 8, 3941</a></span></span></li>
+<li><span class="d">2023</span><span><span class="t">Orbital Engineering in Sillén–Aurivillius Phase Bismuth Oxyiodide Photocatalysts through Interlayer Interactions</span><br><span class="v"><a href="https://doi.org/10.1021/acs.chemmater.3c00932">Chem. Mater. 2023, 35, 5532</a></span></span></li>
+<li><span class="d">2023</span><span><span class="t">An Unexplored Role of the CrO<sub>x</sub> Shell in an Elaborated Rh/CrO<sub>x</sub> Core–Shell Cocatalyst for Photocatalytic Water Splitting</span><br><span class="v">T. Kotani, <b>K. Ogawa</b>, H. Suzuki, K. Kato, O. Tomita, A. Yamakata, R. Abe · <a href="https://pubs.rsc.org/en/content/articlelanding/2023/ey/d2ey00109h">EES Catal. 2023</a></span></span></li>
+<li><span class="d">2022</span><span><span class="t">Manipulation of Charge Carrier Flow in Bi<sub>4</sub>NbO<sub>8</sub>Cl Nanoplate Photocatalyst with Metal Loading</span><br><span class="v"><b>K. Ogawa</b>, R. Sakamoto, C. Zhong, H. Suzuki, K. Kato, O. Tomita, K. Nakashima, A. Yamakata, T. Tachikawa, A. Saeki, H. Kageyama, R. Abe · <a href="https://pubs.rsc.org/en/content/articlelanding/2022/sc/d1sc06054f">Chem. Sci. 2022, 13, 3118</a></span></span></li>
+<li><span class="d">2021</span><span><span class="t">Layered Perovskite Oxyiodide with Narrow Band Gap and Long Lifetime Carriers for Water Splitting Photocatalysis</span><br><span class="v"><b>K. Ogawa</b>, H. Suzuki, C. Zhong, R. Sakamoto, O. Tomita, A. Saeki, H. Kageyama, R. Abe · <a href="https://doi.org/10.1021/jacs.1c02763">J. Am. Chem. Soc. 2021, 143, 8446</a></span></span></li>
+</ol></div>
+</div>
+</section>
+
+<section id="talks" style="padding-top:20px">
+<div class="wrap">
+  <div class="head rv"><h2>Talks<small>学会発表</small></h2><span class="idx">04</span></div>
+  <div class="rv"><div class="year">2026</div>
+  <ol class="items">
+    <li><span class="d">2026</span><span><span class="t">Electrostatic Control of Electronic Structure in Modular Layered Crystals (poster)</span><br><span class="v">K. Ogawa, A. Walsh · 超セラミックス 国際シンポジウム</span></span></li>
+    <li><span class="d">Sep 2026</span><span><span class="t">Origin of Defect Tolerance in Al-doped SrTiO<sub>3</sub> Photocatalyst: Orbital Interaction Perspective <span class="tag">Award</span></span><br><span class="v">K. Ogawa, S. R. Kavanagh, F. Oba, A. Walsh · 11th International Congress on Ceramics (ICC'11), Sapporo · Oral</span></span></li>
+    <li><span class="d">2026</span><span><span class="t">Lone Pair Activity for Electronic Structure Tuning of Post-transition Cations</span><br><span class="v">K. Ogawa · CCP2026</span></span></li>
+    <li><span class="d">2026</span><span><span class="t">Designing Crystals From Coordination Environment</span><br><span class="v">K. Ogawa · Singapore</span></span></li>
+    <li><span class="d">2026</span><span><span class="t">軌道相互作用に基づく無機材料の光化学特性制御</span><br><span class="v">小川幹太 · 光協奏コンソーシアム 第1回公開シンポジウム</span></span></li>
+    <li><span class="d">2026</span><span><span class="t">軌道相互作用をベースにした物質設計</span><br><span class="v">小川幹太 · 超セラミックス（御殿場）</span></span></li>
+    <li><span class="d">2026</span><span><span class="t">Lone-Pair Activity on Post-transition Cations for Electronic Structure Control</span><br><span class="v">K. Ogawa · ACS Spring 2026</span></span></li>
+    <li><span class="d">2026</span><span><span class="t">DFTによるSrTiO<sub>3</sub>:Al光触媒の欠陥耐性機構の解明 (poster)</span><br><span class="v">小川幹太 · 熱海</span></span></li>
+    <li><span class="d">2026</span><span><span class="t">軌道相互作用からの物質の電子構造設計</span><br><span class="v">小川幹太 · 関西学院大学</span></span></li>
+  </ol>
+
+  <div class="year">2025</div>
+  <ol class="items">
+    <li><span class="d">2025</span><span><span class="t">Defect Tolerance via External Passivation in SrTiO<sub>3</sub>:Al Photocatalyst</span><br><span class="v">K. Ogawa, S. R. Kavanagh, F. Oba, A. Walsh · STAC15</span></span></li>
+    <li><span class="d">2025</span><span><span class="t">Bi<sup>3+</sup> Lone-Pair Activity for Electronic Structure Control</span><br><span class="v">K. Ogawa, A. Walsh · ISSSC</span></span></li>
+    <li><span class="d">2025</span><span><span class="t">Lone-Pair Electrons on Post-Transition Cations: Controlling Electronic Structure and Dynamics</span><br><span class="v">K. Ogawa · Korea</span></span></li>
+    <li><span class="d">2025</span><span><span class="t">越境見録 —研究アプローチと環境の変化が導く新たな物質理解—</span><br><span class="v">小川幹太 · 日本セラミックス協会 第38回秋季シンポジウム</span></span></li>
+    <li><span class="d">2025</span><span><span class="t">Modular Approach to Understand the Electronic Structure of Bi-based Layered Materials (poster)</span><br><span class="v">K. Ogawa, A. Walsh · Psi-k 2025</span></span></li>
+    <li><span class="d">2025</span><span><span class="t">結晶中のマクロポテンシャルによるモジュール的電子構造制御</span><br><span class="v">小川幹太, A. Walsh</span></span></li>
+  </ol>
+
+  <div class="year">2024</div>
+  <ol class="items">
+    <li><span class="d">Dec 2024</span><span><span class="t">Band gap narrowing by designing lone-pair orbital interaction in Bi<sup>3+</sup></span><br><span class="v">K. Ogawa, A. Walsh · 2024 MRS Fall Meeting &amp; Exhibit, Boston</span></span></li>
+    <li><span class="d">Oct 2024</span><span><span class="t">Controlling the stereochemical activity of lone-pair on Bi<sup>3+</sup> for bandgap tuning</span><br><span class="v">K. Ogawa, A. Walsh · STAC14, Yokohama</span></span></li>
+    <li><span class="d">Sep 2024</span><span><span class="t">Bi<sup>3+</sup>のローンペア活性制御によるバンドギャップの狭窄化</span><br><span class="v">小川幹太, A. Walsh · 日本セラミックス協会 第37回秋季シンポジウム</span></span></li>
+  </ol>
+
+  <details>
+    <summary>Earlier talks (2017–2023)</summary>
+    <ol class="items" style="margin-top:12px">
+      <li><span class="d">Dec 2023</span><span><span class="t">Band gap narrowing by modified lone-pair activity of Bi<sup>3+</sup></span><br><span class="v">K. Ogawa, A. Walsh · RSC Solid State Christmas Meeting 2023, Edinburgh</span></span></li>
+      <li><span class="d">Jul 2023</span><span><span class="t">Bismuth-based layered-perovskite oxyiodides for visible-light water splitting</span><br><span class="v">K. Ogawa, A. Walsh, R. Abe · MC16, Dublin</span></span></li>
+      <li><span class="d">Dec 2022</span><span><span class="t">Fe<sup>III</sup>/Fe<sup>II</sup> redox cycle in FeO<sub>x</sub> cocatalyst boosting reduction of redox shuttle on photocatalyst surface in Z-scheme water splitting</span><br><span class="v">K. Ogawa et al. · 6th TYC Energy Materials workshop, London</span></span></li>
+      <li><span class="d">Nov 2022</span><span><span class="t">Manipulation of charge carrier flow in a Bi<sub>4</sub>NbO<sub>8</sub>Cl nanoplate with metal loading for water splitting photocatalysis</span><br><span class="v">K. Ogawa et al. · Materials Chemistry Poster Symposium, London</span></span></li>
+      <li><span class="d">Dec 2021</span><span><span class="t">ヨウ化物イオン導入による層状ペロブスカイト酸ハロゲン化物の特異的バンドギャップ縮小とO<sub>2</sub>生成活性向上</span><br><span class="v">小川幹太ほか · 第40回固体・表面光化学討論会（オンライン）</span></span></li>
+      <li><span class="d">Sep 2020</span><span><span class="t">新規ヨウ化物系可視光水分解用光触媒Ba<sub>2</sub>Bi<sub>3</sub>Nb<sub>2</sub>O<sub>11</sub>I</span><br><span class="v">小川幹太ほか · 第126回触媒討論会（オンライン）</span></span></li>
+      <li><span class="d">Sep 2020</span><span><span class="t">貴金属および Cr種の共担持によるオキシハライド光触媒の水素生成活性向上</span><br><span class="v">小谷哲, 小川幹太ほか · 第126回触媒討論会（オンライン）</span></span></li>
+      <li><span class="d">Mar 2020</span><span><span class="t">一粒子上での反応観察およびマイクロ波伝導度測定による層状酸ハロゲン化物光触媒の光励起キャリアダイナミクスの解明</span><br><span class="v">小川幹太ほか · 日本化学会第100春季年会, 千葉</span></span></li>
+      <li><span class="d">Mar 2020</span><span><span class="t">Bi系オキシハライド光触媒の酸素生成活性を向上させるFe/Ru助触媒の機構解明</span><br><span class="v">室伏克哉, 小川幹太ほか · 日本化学会第100春季年会, 千葉</span></span></li>
+      <li><span class="d">Oct 2019</span><span><span class="t">Flux Synthesis of Layered Perovskite Oxyhalide Bi<sub>4</sub>NbO<sub>8</sub>Cl Photocatalyst for Efficient Water Oxidation Under Visible Light</span><br><span class="v">K. Ogawa et al. · PACRIM13, Okinawa</span></span></li>
+      <li><span class="d">Sep 2019</span><span><span class="t">光励起キャリアの有効利用による層状酸ハロゲン化物光触媒の水素生成活性向上</span><br><span class="v">小川幹太ほか · 第124回触媒討論会, 長崎</span></span></li>
+      <li><span class="d">Aug 2019</span><span><span class="t">層状酸ハロゲン化物光触媒の水素生成活性向上のための助触媒による光励起キャリアの有効利用</span><br><span class="v">小川幹太 · 第40回触媒学会若手会「夏の研修会」, 愛知</span></span></li>
+      <li><span class="d">Aug 2019</span><span><span class="t">層状酸ハロゲン化物Bi<sub>2</sub>LnO<sub>4</sub>Clの希土類元素種が光触媒特性に及ぼす影響</span><br><span class="v">村瀬祐樹, 小川幹太ほか · 第13回触媒道場, 滋賀</span></span></li>
+      <li><span class="d">Mar 2019</span><span><span class="t">Flux synthesis of Bi-based layered oxyhalide photocatalyst for efficient Z-scheme water splitting under visible light</span><br><span class="v">K. Ogawa et al. · Faraday Discussion: Artificial Photosynthesis, Cambridge</span></span></li>
+      <li><span class="d">Sep 2018</span><span><span class="t">高効率可視光Zスキーム型水分解を目的とした層状酸ハロゲン化物のフラックス合成</span><br><span class="v">小川幹太ほか · 第122回触媒討論会, 北海道</span></span></li>
+      <li><span class="d">Mar 2018</span><span><span class="t">層状酸ハロゲン化物Bi<sub>4</sub>NbO<sub>8</sub>Clのフラックス合成とZスキーム型可視光水分解への適用</span><br><span class="v">小川幹太ほか · 第121回触媒討論会, 東京</span></span></li>
+      <li><span class="d">Oct 2017</span><span><span class="t">可視光応答型ビスマス系層状酸ハロゲン化物光触媒粒子のフラックス合成と水分解反応への適用</span><br><span class="v">小川幹太ほか · 第7回CSJ化学フェスタ2017, 東京</span></span></li>
+      <li><span class="d">Aug 2017</span><span><span class="t">可視光応答型層状酸ハロゲン化物Bi<sub>4</sub>NbO<sub>8</sub>Cl光触媒粒子のフラックス合成と水分解反応への適用</span><br><span class="v">小川幹太ほか · 第38回触媒学会若手会夏の研修会, 滋賀</span></span></li>
+      <li><span class="d">Jun 2017</span><span><span class="t">Hydrothermal Synthesis of WO<sub>3</sub> Particles for Efficient Photocatalytic Water Oxidation from Fe<sup>3+</sup> Aqueous Solution under Visible Light Irradiation</span><br><span class="v">小川幹太ほか · 触媒学会西日本支部第8回触媒科学研究発表会, 大阪</span></span></li>
+    </ol>
+  </details>
+</div>
+</div>
+</section>
+
+<section id="cv" style="padding-top:20px">
+<div class="wrap">
+  <div class="head rv"><h2>CV<small>経歴・受賞</small></h2><span class="idx">05</span></div>
+  <div class="rv"><div class="cv">
+    <div class="card">
+      <h3>Career</h3>
+      <ol class="items">
+        <li><span class="d">2025–</span><span><span class="t">Assistant Professor</span><br><span class="v">Graduate School of Science, Kyoto University (Yamamoto Group)</span></span></li>
+        <li><span class="d">2024–2025</span><span><span class="t">JSPS Research Fellow</span><br><span class="v">Institute of Science Tokyo (<a href="https://www.cms-mi.msl.titech.ac.jp/">Oba Group</a>)</span></span></li>
+        <li><span class="d">2022–2024</span><span><span class="t">JSPS Overseas Research Fellow</span><br><span class="v">Imperial College London (<a href="https://wmd-group.github.io/">Walsh Group</a>)</span></span></li>
+        <li><span class="d">2022</span><span><span class="t">Researcher</span><br><span class="v">Graduate School of Engineering, Kyoto University</span></span></li>
+        <li><span class="d">2018–2022</span><span><span class="t">Research Assistant</span><br><span class="v">AIST–Kyoto University ChEM-OIL</span></span></li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Education</h3>
+      <ol class="items">
+        <li><span class="d">2019–2022</span><span><span class="t">Ph.D. (Engineering), JSPS DC1</span><br><span class="v">Kyoto University (Abe Group)</span></span></li>
+        <li><span class="d">2017–2019</span><span><span class="t">M.Eng.</span><br><span class="v">Kyoto University</span></span></li>
+        <li><span class="d">2013–2017</span><span><span class="t">B.Eng.</span><br><span class="v">Kyoto University, Faculty of Engineering</span></span></li>
+      </ol>
+    </div>
+    <div class="card" style="grid-column:1/-1">
+      <h3>Awards</h3>
+      <ol class="items">
+        <li><span class="d">Sep 2026</span><span><span class="t">Outstanding Presentation Award (Oral)</span><br><span class="v">11th International Congress on Ceramics (ICC'11), Sapporo</span></span></li>
+        <li><span class="d">Aug 2024</span><span class="t">エスペック環境研究奨励賞</span></li>
+        <li><span class="d">Dec 2021</span><span class="t">第40回 固体・表面光化学討論会 学生優秀講演賞</span></li>
+        <li><span class="d">Aug 2019</span><span class="t">第40回触媒学会若手会「夏の研修会」優秀口頭発表賞 2位</span></li>
+        <li><span class="d">Jul 2019</span><span class="t">工学研究科 馬詰奨励賞</span></li>
+        <li><span class="d">Oct 2017</span><span class="t">第10回触媒表面化学研究発表会 優秀研究賞</span></li>
+        <li><span class="d">Oct 2017</span><span class="t">第7回CSJ化学フェスタ2017 優秀ポスター発表賞</span></li>
+        <li><span class="d">Aug 2017</span><span class="t">第38回触媒学会夏の研修会 優秀ポスター発表賞 第1位</span></li>
+        <li><span class="d">Jun 2017</span><span class="t">触媒学会西日本支部第8回触媒科学研究発表会 優秀ポスター発表賞</span></li>
+      </ol>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<section id="contact" class="contact">
+<div class="wrap">
+  <div class="head rv"><h2>Contact<small>連絡先</small></h2><span class="idx">06</span></div>
+  <div class="rv">
+    <div class="addr">Department of Chemistry, Graduate School of Science, Kyoto University<br>Kitashirakawa Oiwake-cho, Sakyo-ku, Kyoto 606-8502, Japan<br>〒606-8502 京都市左京区北白川追分町 京都大学大学院理学研究科 化学専攻</div>
+    <a class="mail" href="mailto:ogawa.kanta.3y@kyoto-u.ac.jp">ogawa.kanta.3y@kyoto-u.ac.jp</a>
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Kanta Ogawa</span>
+    <button class="theme" id="theme">LIGHT / DARK</button>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* loader */
+  var p=0, pct=document.getElementById('pct'), bar=document.getElementById('bar');
+  function done(){ document.body.classList.add('loaded'); }
+  if(reduce){ done(); } else {
+    var t=setInterval(function(){ p=Math.min(100,p+Math.ceil(Math.random()*9)); pct.textContent=p; bar.style.width=p+'%'; if(p>=100){clearInterval(t); setTimeout(done,200);} },28);
+    setTimeout(done,2500);
+  }
+  /* header */
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('solid', scrollY > innerHeight*0.75); }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var mb=document.getElementById('menuBtn'), menu=document.getElementById('menu');
+  mb.addEventListener('click',function(){ menu.classList.toggle('open'); });
+  menu.addEventListener('click',function(e){ if(e.target.tagName==='A') menu.classList.remove('open'); });
+  /* reveal + counters */
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);
+      var n=e.target.querySelector('[data-count]'); if(n && !reduce){ var end=+n.dataset.count, k=0; var s=setInterval(function(){ k++; n.textContent=String(Math.round(end*k/30)).padStart(2,'0'); if(k>=30) clearInterval(s); },30); } } }); },{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  /* tabs */
+  var tabs=document.querySelectorAll('.tab');
+  tabs.forEach(function(tb){ tb.addEventListener('click',function(){
+    tabs.forEach(function(x){ x.classList.remove('on'); x.setAttribute('aria-selected','false'); });
+    tb.classList.add('on'); tb.setAttribute('aria-selected','true');
+    document.querySelectorAll('.panel').forEach(function(pn){ var on=pn.id==='p-'+tb.dataset.t; pn.hidden=!on; pn.classList.toggle('on',on); });
+  }); });
+  /* theme */
+  var r=document.documentElement;
+  try{var sv=localStorage.getItem('theme'); if(sv) r.setAttribute('data-theme',sv);}catch(e){}
+  document.getElementById('theme').addEventListener('click',function(){
+    var dark = r.getAttribute('data-theme')==='dark' || (!r.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    var n=dark?'light':'dark'; r.setAttribute('data-theme',n); try{localStorage.setItem('theme',n);}catch(e){}
+  });
+  /* lattice canvas: a slowly breathing crystal lattice with orbital-like glow */
+  var c=document.getElementById('lattice'), ctx=c.getContext('2d'), W,H,dpr,pts=[],mx=-1e4,my=-1e4;
+  function build(){
+    dpr=Math.min(devicePixelRatio||1,2); W=c.clientWidth; H=c.clientHeight; c.width=W*dpr; c.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    pts=[]; var a=Math.max(56,Math.min(90,W/16)), h=a*Math.sqrt(3)/2;
+    for(var j=-1;j*h<H+h;j++) for(var i=-1;i*a<W+a;i++){
+      pts.push({x0:i*a+(j%2?a/2:0), y0:j*h, ph:Math.random()*6.28, type:(i+j)%3===0?1:0});
+    }
+  }
+  function frame(tm){
+    var t=tm/1000; ctx.clearRect(0,0,W,H);
+    for(var k=0;k<pts.length;k++){ var q=pts[k]; var dx=q.x0-mx, dy=q.y0-my, d2=dx*dx+dy*dy, push=d2<40000? (1-d2/40000)*14:0, dd=Math.sqrt(d2)||1;
+      q.x=q.x0+Math.sin(t*.6+q.ph)*3+dx/dd*push; q.y=q.y0+Math.cos(t*.5+q.ph)*3+dy/dd*push; }
+    ctx.lineWidth=1;
+    for(var a1=0;a1<pts.length;a1++){ var p1=pts[a1];
+      for(var b1=a1+1;b1<pts.length;b1++){ var p2=pts[b1]; var ex=p1.x-p2.x, ey=p1.y-p2.y, e=ex*ex+ey*ey; if(e<10000){
+        var fade=Math.max(0,1-p1.y0/H*0.9); ctx.strokeStyle='rgba(120,160,255,'+(0.10*fade+0.03)+')'; ctx.beginPath(); ctx.moveTo(p1.x,p1.y); ctx.lineTo(p2.x,p2.y); ctx.stroke(); } } }
+    for(var m=0;m<pts.length;m++){ var q2=pts[m]; var pulse=.5+.5*Math.sin(t*1.2+q2.ph);
+      if(q2.type){ var g=ctx.createRadialGradient(q2.x,q2.y,0,q2.x,q2.y,18); g.addColorStop(0,'rgba(58,209,230,'+(0.35*pulse)+')'); g.addColorStop(1,'rgba(58,209,230,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(q2.x,q2.y,18,0,6.29); ctx.fill();
+        ctx.fillStyle='rgba(180,240,255,.9)'; ctx.beginPath(); ctx.arc(q2.x,q2.y,2.4,0,6.29); ctx.fill(); }
+      else { ctx.fillStyle='rgba(150,140,255,.55)'; ctx.beginPath(); ctx.arc(q2.x,q2.y,1.6,0,6.29); ctx.fill(); } }
+    if(!reduce) requestAnimationFrame(frame);
+  }
+  build(); addEventListener('resize',build);
+  c.parentElement.addEventListener('mousemove',function(e){ var r2=c.getBoundingClientRect(); mx=e.clientX-r2.left; my=e.clientY-r2.top; });
+  c.parentElement.addEventListener('mouseleave',function(){ mx=my=-1e4; });
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
